@@ -34,10 +34,14 @@ options('f', {
 options('v', {
 	alias: 'version',
 	description: 'Display version number'
+}).
+options('a', {
+	alias: 'arch',
+	description: 'Sets target archeticture',
+	default: process.arch
 });
 
 var argv = cli.argv;
-
 
 if(argv.h || argv.help) {
 	cli.showHelp();
@@ -59,6 +63,7 @@ require('../lib').compile({
 	input       : require.resolve(toRelative(argv.i)),
 	output      : toRelative(argv.o), 
 	flags       : argv.f,
+	arch 		: argv.a,
 	nodeVersion : argv.r, 
 	nodeTempDir : toRelative(argv.t) }, function(error) {
 
